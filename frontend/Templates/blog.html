@@ -1,0 +1,421 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlatePal Blog • Fresh recipes, smart cooking tips, AI hacks, zero-waste ideas &amp; real stories from 142K+ Indian kitchens. Cook better every day.">
+    <title>PlatePal • Blog</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <!-- Font Awesome CDN (external icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ========== HEADER (exactly from second snippet) ========== -->
+<header id="header">
+    <div class="header-container">
+        <div class="logo">
+            <div class="logo-box">🍽️</div>
+            <a href="{% url 'home' %}">">PlatePal</a>
+        </div>
+        <nav>
+            <a href="{% url 'howitswork' %}">"><i class="fa-solid fa-circle-info"></i> How it Works</a>
+            <a href="{% url 'recipes' %}">"><i class="fa-solid fa-utensils"></i> Recipes</a>
+            <a href="#">Plans</a>
+            <a href="#">Community</a>
+            <a href="{% url 'blog' %}">l" class="active-nav" style="color:#20b2aa; position:relative;">Blog</a>
+        </nav>
+        <div class="header-buttons">
+            <a href="#" class="login-btn" onclick="alert('Login / Sign up')"><i class="fa-solid fa-user"></i> Log in</a>
+            <button class="cta-btn" onclick="showPlannerModal()"><i class="fa-solid fa-wand-magic-sparkles"></i> Start Free Plan</button>
+            <div class="menu-btn" onclick="toggleMobileMenu()">
+                <i id="menu-icon" class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </div>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="{% url 'howitswork' %}">">How it Works</a>
+        <a href="{% url 'recipes' %}">">Recipes</a>
+        <a href="#">Plans</a>
+        <a href="#">Community</a>
+        <a href="{% url 'blog' %}">">Blog</a>
+        <button class="cta-btn" style="width:100%; justify-content:center; margin-top:10px;" onclick="showPlannerModal()">Start Free Plan</button>
+    </div>
+</header>
+
+<!-- ========== BLOG PAGE MAIN CONTENT (hero, categories, grid, etc.) ========== -->
+<section class="blog-hero">
+    <div class="container" style="width:100%">
+        <div class="hero-grid">
+            <div>
+                <div class="live-badge">
+                    <div class="pulse"></div>
+                    <span>87,429 food lovers reading this month</span>
+                </div>
+                <h1 class="hero-title heading-font">Stories that<br>make you cook.</h1>
+                <p style="font-size:1.2rem; opacity:0.9;">Real recipes. Smart AI tips. Zero-waste hacks.<br>From Indian kitchens to your table.</p>
+                <div class="hero-buttons">
+                    <button class="btn-white" onclick="subscribeNewsletter()"><i class="fa-solid fa-envelope"></i> Subscribe free</button>
+                    <a href="#all-posts" class="btn-outline-light">Browse all stories →</a>
+                </div>
+                <div style="display:flex; gap:1.5rem; align-items:center;">
+                    <div style="display:flex;"><div style="width:36px;height:36px;background:#ff6b35; border-radius:1rem;display:flex;align-items:center;justify-content:center;">📖</div><div style="width:36px;height:36px;background:#20b2aa; margin-left:-0.5rem; border-radius:1rem;display:flex;align-items:center;justify-content:center;">🔥</div><div style="width:36px;height:36px;background:#fbbf24; margin-left:-0.5rem; border-radius:1rem;display:flex;align-items:center;justify-content:center;">🍛</div></div>
+                    <span>124 articles • 4.98 average rating • Updated weekly</span>
+                    <div>★★★★☆ <span style="opacity:0.8;">(4.98)</span></div>
+                </div>
+            </div>
+            <div style="position:relative;">
+                <div class="floating-card">
+                    <div style="display:flex; justify-content:space-between;"><span style="background:#fbbf24; padding:0.2rem 1rem; border-radius:2rem; color:#011627;">NEW THIS WEEK</span><span>8 min read</span></div>
+                    <h3 style="font-size:1.5rem; font-weight:bold; margin:1rem 0;">“I saved ₹2,847 last month with one simple habit my mom never taught me.”</h3>
+                    <p>My kitchen used to waste food and money — PlatePal completely changed that.</p>
+                    <div style="display:flex; align-items:center; gap:1rem; margin-top:1.5rem;">
+                        <img src="{% static 'img/saif.png '%}" style="width:40px;height:40px; border-radius:1rem;">
+                        <div><div style="font-weight:500;">Saifullah Haidar</div><div style="opacity:0.7;">Ranchi • March 2026</div></div>
+                    </div>
+                </div>
+                <div class="floating" style="position:absolute; bottom:-30px; right:-20px; background:white; color:#011627; padding:1rem 1.5rem; border-radius:2rem; display:flex; gap:1rem; box-shadow:0 15px 25px -10px rgba(0,0,0,0.2);">
+                    Trending in India <span style="color:#ff6b35;">🔥</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); text-align:center; opacity:0.7;">
+        Scroll for fresh stories <i class="fa-solid fa-chevron-down animate-bounce"></i>
+    </div>
+</section>
+
+<!-- CATEGORY FILTERS -->
+<div class="category-strip">
+    <div class="container">
+        <div class="category-pills" id="categoryFilters"></div>
+    </div>
+</div>
+
+<!-- FEATURED POST -->
+<section style="padding:2rem 0; background:#fff8f0;">
+    <div class="container">
+        <div style="margin-bottom:2rem;"><span style="background:#ff6b3510; padding:0.3rem 1.2rem; border-radius:2rem; color:#ff6b35;">✨ HUMAN HACKS STORY</span></div>
+        <div class="featured-card" onclick="viewBlogPost(0)">
+            <div><img src="{% static 'img/FEATURED POST 1.png' %}" style="width:100%; height:100%; object-fit:cover; min-height:300px;"></div>
+            <div style="padding:2rem;">
+                <div style="color:#20b2aa; font-weight:600;">✍️ HUMAN HACKS</div>
+                <h2 class="heading-font" style="font-size:2.2rem; font-weight:800; margin:1rem 0;">“How I reduced my monthly expenses by 40% using one simple habit”</h2>
+                <p>By tracking every rupee for 30 days, I discovered where my money was going. After fixing a few bad habits and stopping impulse buying, I started saving ₹10,000 every month without changing my lifestyle.</p>
+                <div style="display:flex; align-items:center; gap:1rem; margin-top:2rem; border-top:1px solid #e5e7eb; padding-top:1.5rem;">
+                    <img src="{% static 'img/saif.png' %}" style="width:40px; border-radius:1rem;">
+                    <div><div style="font-weight:600;">Saifullah Haidar</div><div style="font-size:0.8rem;">Ranchi • 6 days ago • 12 min read</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ====================== SECOND FEATURED POST (Text Left - Image Right) ====================== -->
+<section style="padding:4rem 0; background:#fff8f0;">
+    <div class="container">
+        
+        <div style="margin-bottom:2rem;">
+            <span style="background:#20b2aa10; padding:0.35rem 1.3rem; border-radius:2rem; color:#20b2aa; font-weight:600;">
+                🌟 ZERO WASTE STORY
+            </span>
+        </div>
+
+        <div class="featured-card reversed-featured" onclick="viewBlogPost(7)">
+            
+            <!-- TEXT ON LEFT -->
+            <div style="padding:2rem;">
+                <div style="color:#ff6b35; font-weight:600; display:flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-leaf"></i> ZERO WASTE
+                </div>
+                <h2 class="heading-font" style="font-size:2.2rem; font-weight:800; margin:1.2rem 0 1rem; line-height:1.15;">
+                    My kitchen now throws away almost nothing — here’s the ₹0 waste system that actually works
+                </h2>
+                <p style="font-size:1.08rem; color:#334155; margin-bottom:1.8rem;">
+                   My kitchen once wasted food like stale rotis, peels, and leftovers. By turning them into snacks, broths, and meals using simple ideas and grandma tricks, I built a ₹0-waste system.
+                </p>
+                <div style="display:flex; align-items:center; gap:1rem; border-top:1px solid #e5e7eb; padding-top:1.5rem;">
+                    <img src="{% static 'img/nitin.png' %}" style="width:42px; height:42px; border-radius:12px; object-fit:cover;">
+                    <div>
+                        <div style="font-weight:600;">Nitin Kumar</div>
+                        <div style="font-size:0.82rem; color:#64748b;">Bokaro • 3 days ago • 10 min read</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IMAGE ON RIGHT -->
+            <div>
+                <img src="{% static 'img/FEATURED POST 2.png' %}" 
+                     style="width:100%; height:100%; object-fit:cover; min-height:320px;">
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- FEATURED POST -->
+<section style="padding:2rem 0; background:#fff8f0;">
+    <div class="container">
+        <div style="margin-bottom:2rem;"><span style="background:#35ffda10; padding:0.3rem 1.2rem; border-radius:2rem; color:#005e11;">⚡ PRODUCTIVE STORY</span></div>
+        <div class="featured-card" onclick="viewBlogPost(0)">
+            <div><img src="{% static 'img/FEATURED POST 3.png' %}" style="width:100%; height:100%; object-fit:cover; min-height:300px;"></div>
+            <div style="padding:2rem;">
+                <div style="color:#20b2aa; font-weight:600;">⚡ Productivity Style</div>
+                <h2 class="heading-font" style="font-size:2.2rem; font-weight:800; margin:1rem 0;">How I built a daily routine that completely changed my productivity</h2>
+                <p>I created a simple daily routine by planning my tasks the night before and starting my mornings without distractions. By focusing on the most important work first and staying consistent with small habits, my productivity improved and I was able to accomplish more each day.</p>
+                <div style="display:flex; align-items:center; gap:1rem; margin-top:2rem; border-top:1px solid #e5e7eb; padding-top:1.5rem;">
+                    <img src="{% static 'img/ravi.png' %}" style="width:40px; border-radius:1rem;">
+                    <div><div style="font-weight:600;">Ravi Ranjan</div><div style="font-size:0.8rem;">Hazaribagh • 6 days ago • 12 min read</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog-section">
+
+<div class="blog-container">
+
+<h2 class="blog-heading">Latest from the kitchen</h2>
+
+<div class="blog-grid">
+
+<!-- CARD 1 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/Real Indian flavors.png'%}">
+<span class="blog-tag">🍜 AI Tips</span>
+</div>
+
+<div class="blog-content">
+<h3>How to make your AI plan taste exactly like your mom’s dal</h3>
+
+<p>One simple prompt changed everything. Real Indian flavors in 60 seconds.</p>
+
+<div class="blog-meta">
+
+<div class="meta-left">
+<span>2 days ago</span>
+<span>•</span>
+<span>6 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/avatar1.jpg' %}">
+<div>
+<b>Sneha Kapoor</b>
+<span>Delhi</span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- CARD 2 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/5 quick Indian dinners.png' %}">
+<span class="blog-tag">🥘 Recipes</span>
+</div>
+
+<div class="blog-content">
+<h3>5 quick Indian dinners you can cook in under 20 minutes</h3>
+
+<p>Fast meals for busy evenings that still taste homemade.</p>
+
+<div class="blog-meta">
+<div class="meta-left">
+<span>3 days ago</span>
+<span>•</span>
+<span>5 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/avatar2.jpg' %}">
+<div>
+<b>Rahul Mehta</b>
+<span>Mumbai</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CARD 3 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/My ₹0 waste kitchen.png' %}">
+<span class="blog-tag">🌱 Zero Waste</span>
+</div>
+
+<div class="blog-content">
+<h3>My ₹0 waste kitchen system that actually works</h3>
+
+<p>From leftover rotis to vegetable peels — nothing goes to waste.</p>
+
+<div class="blog-meta">
+<div class="meta-left">
+<span>1 week ago</span>
+<span>•</span>
+<span>8 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/nitin.png' %}">
+<div>
+<b>Nitin Kumar</b>
+<span>Bokaro</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CARD 4 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/Indian kitchens are going viral.png' %}">
+<span class="blog-tag">🔥 Trending</span>
+</div>
+
+<div class="blog-content">
+<h3>Why Indian kitchens are going viral in 2026</h3>
+
+<p>The cooking habits changing millions of homes.</p>
+
+<div class="blog-meta">
+<div class="meta-left">
+<span>4 days ago</span>
+<span>•</span>
+<span>7 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/ravi.png' %}">
+<div>
+<b>Ravi Ranjan</b>
+<span>Hazaribagh</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CARD 5 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/The secret to restaurant style paneer.png' %}">
+<span class="blog-tag">🍛 Cooking</span>
+</div>
+
+<div class="blog-content">
+<h3>The secret to restaurant style paneer at home</h3>
+
+<p>This small spice trick changes everything.</p>
+
+<div class="blog-meta">
+<div class="meta-left">
+<span>2 days ago</span>
+<span>•</span>
+<span>4 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/saif.png' %}">
+<div>
+<b>Saifullah Haidar</b>
+<span>Ranchi</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CARD 6 -->
+<div class="blog-card">
+<div class="blog-image">
+<img src="{% static 'img/How I cook a week of meals in just 2 hours.png' %}">
+<span class="blog-tag">⚡ Productivity</span>
+</div>
+
+<div class="blog-content">
+<h3>How I cook a week of meals in just 2 hours</h3>
+
+<p>Meal prep routine that saves time and money.</p>
+
+<div class="blog-meta">
+<div class="meta-left">
+<span>6 days ago</span>
+<span>•</span>
+<span>9 min</span>
+</div>
+
+<div class="author">
+<img src="{% static 'img/avatar6.jpg' %}">
+<div>
+<b>Anjali Singh</b>
+<span>Delhi</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+
+<!-- ========== FOOTER (exactly from second snippet) ========== -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <div class="brand-logo">🍽️</div>
+            <h2>PlatePal</h2>
+            <p>Making every meal meaningful with AI that actually gets your tastebuds.</p>
+            <div class="socials">
+                <i class="fa-brands fa-instagram" onclick="alert('Instagram')"></i>
+                <i class="fa-brands fa-x-twitter" onclick="alert('X')"></i>
+                <i class="fa-brands fa-youtube" onclick="alert('YouTube')"></i>
+            </div>
+        </div>
+        <div class="footer-links">
+            <h4>Product</h4>
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">Mobile App</a>
+            <a href="{% url 'blog' %}">">Blog</a>
+        </div>
+        <div class="footer-links">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Stories</a>
+            <a href="#">Careers</a>
+            <a href="{% url 'contact' %}">">Contact</a>
+        </div>
+        <div class="footer-newsletter">
+            <h4>Get weekly deliciousness</h4>
+            <div class="newsletter-box">
+                <input type="email" id="footerNewsEmail" placeholder="your@email.com">
+                <button onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+            <p class="note">Zero spam. Only tasty recipes ✨</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 PlatePal • Made with ❤️</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Accessibility</a>
+        </div>
+        <p>India 🌍</p>
+    </div>
+</footer>
+
+<!-- PLANNER MODAL -->
+<div id="plannerModal" class="modal"><div class="modal-card"><div style="padding:2rem;"><h3 style="font-size:2rem; text-align:center;">Let’s build your perfect week</h3><div><label>How many people?</label><div style="display:flex; gap:0.5rem; margin:0.5rem 0;"><button class="plan-opt" data-val="1">Just me</button><button class="plan-opt active-plan">2 people</button><button class="plan-opt">Family of 4</button></div></div><div><label>Diet preference</label><select id="dietSelect" style="width:100%; padding:1rem; border-radius:2rem; margin:0.5rem 0;"><option>Balanced & healthy</option><option>High-protein</option><option>Vegan</option><option>Indian vegetarian</option></select></div><div><label>Days (3-7)</label><input type="range" min="3" max="7" value="5" id="daysSlider" style="width:100%;"><span id="daysVal">5</span></div></div><div style="background:#011627; display:flex; justify-content:space-between; padding:1.5rem;"><button onclick="closePlannerModal()" style="color:white;">Cancel</button><button onclick="genPlan()" style="color:white; font-weight:bold;">GENERATE MY PLAN ✨</button></div></div></div>
+
+<script src="{% static 'js/blog.js' %}"></script>
+</body>
+</html>

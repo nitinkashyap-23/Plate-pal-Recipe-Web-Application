@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+ 
+  <div class="bigb">
+     <a href="{% url 'home' %}" class="close-btn">
+        &times;
+    </a>
+    <form action="#">
+      <h1>Sign Up</h1>
+
+      <div class="inputbox">
+        <input type="text" placeholder="Enter your username" required>
+        <i class="fa-solid fa-user"></i> 
+      </div>
+
+      <div class="inputbox">
+        <input type="email" placeholder="Enter your email" required>
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+
+      <div class="inputbox">
+        <input type="password" placeholder="Create password" required>
+        <i class="fa-solid fa-lock" id="togglePassword"></i>
+      </div>
+
+      <div class="inputbox">
+        <input type="password" placeholder="Confirm password" required>
+        <i class="fa-solid fa-lock" id="togglePassword"></i>
+      </div>
+
+      <button type="submit" class="btn">Sign Up</button>
+
+      <div class="register-link">
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>
