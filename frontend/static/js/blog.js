@@ -1,27 +1,4 @@
-    // ---------- Header scroll effect (from second snippet) ----------
-    window.addEventListener("scroll", () => {
-        const header = document.getElementById("header");
-        if (window.scrollY > 30) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    });
 
-    // Mobile menu toggle (updated)
-    function toggleMobileMenu() {
-        const menu = document.getElementById("mobileMenu");
-        const icon = document.getElementById("menu-icon");
-        if (menu.style.display === "flex") {
-            menu.style.display = "none";
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-        } else {
-            menu.style.display = "flex";
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
-        }
-    }
 
     // ---------- Blog page specific data and functions ----------
     const blogPosts = [

@@ -1,30 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="demo.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlatePal Header</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}
+    {% endblock %}
 </head>
 <body>
-    <header id="header">
+<header id="header">
 <div class="container">
         <!-- Logo -->
          <div class="logo">
             <div class="logo-box">🍽️</div>
-            <a href="home.html">PlatePal</a><span>AI</span>
+            <a href="{% url 'home' %}">PlatePal</a>
         </div>
 <!-- Desktop Navigation -->
     <nav>
-        <a href="howitswork.html"><i class="fa-solid fa-circle-info"></i> How it Works</a>
-        <a href="#"><i class="fa-solid fa-utensils"></i> Recipes</a>
-        <a href="#">Plans</a><a href="#">Community</a>
-        <a href="blog.html">Blog</a>
+        <a href="{% url 'howitswork' %}"><i class="fa-solid fa-circle-info"></i> How it Works</a>
+        <a href="{% url 'recipes' %}"><i class="fa-solid fa-utensils"></i> Recipes</a>
+        <a href="#">Plans</a>
+        <a href="#">Community</a>
+        <a href="{% url 'blog' %}">Blog</a>
     </nav>
 <!-- Buttons -->
 <div class="header-buttons">
-    <a href="login.html" class="login-btn">
+    <a href="{% url 'login' %}" class="login-btn">
         <i class="fa-solid fa-user"></i>
         Log in
     </a>
@@ -39,14 +43,16 @@
 </div>
 <!-- Mobile Menu -->
 <div id="mobileMenu" class="mobile-menu">
-    <a href="howitswork.html">How it Works</a>
-    <a href="recipes.html">Recipes</a>
+    <a href="{% url 'howitswork' %}">How it Works</a>
+    <a href="{% url 'recipes' %}">Recipes</a>
     <a href="#">Plans</a>
-    <a href="">Community</a>
-    <a href="blog.html">Blog</a>
+    <a href="#">Community</a>
+    <a href="{% url 'blog' %}">Blog</a>
 </div>
 </header>
+{% block content %}
 
+{% endblock %}
 
 <footer class="footer">
     <div class="footer-container">
@@ -73,11 +79,11 @@
             <a href="#">Blog</a>
         </div>
         <div class="footer-links">
-            <h4>Company</h4>
+            <h4>Company</h4> 
             <a href="#">About</a>
             <a href="#">Stories</a>
             <a href="#">Careers</a>
-            <a href="contact.html">Contact</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </div>
         <!-- NEWSLETTER -->
         <div class="footer-newsletter">
@@ -102,5 +108,11 @@
         <p>India 🌍</p>
     </div>
 </footer>
+
+<script src="{% static 'js/base.js' %}"></script>
+{% block extra_js %}
+
+{% endblock %}
+
 </body>
 </html>

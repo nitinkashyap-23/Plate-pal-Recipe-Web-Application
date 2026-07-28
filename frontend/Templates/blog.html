@@ -1,50 +1,13 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PlatePal Blog • Fresh recipes, smart cooking tips, AI hacks, zero-waste ideas &amp; real stories from 142K+ Indian kitchens. Cook better every day.">
-    <title>PlatePal • Blog</title>
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <!-- Font Awesome CDN (external icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css'%}">
+{% endblock %}
 
-<!-- ========== HEADER (exactly from second snippet) ========== -->
-<header id="header">
-    <div class="header-container">
-        <div class="logo">
-            <div class="logo-box">🍽️</div>
-            <a href="{% url 'home' %}">">PlatePal</a>
-        </div>
-        <nav>
-            <a href="{% url 'howitswork' %}">"><i class="fa-solid fa-circle-info"></i> How it Works</a>
-            <a href="{% url 'recipes' %}">"><i class="fa-solid fa-utensils"></i> Recipes</a>
-            <a href="#">Plans</a>
-            <a href="#">Community</a>
-            <a href="{% url 'blog' %}">l" class="active-nav" style="color:#20b2aa; position:relative;">Blog</a>
-        </nav>
-        <div class="header-buttons">
-            <a href="#" class="login-btn" onclick="alert('Login / Sign up')"><i class="fa-solid fa-user"></i> Log in</a>
-            <button class="cta-btn" onclick="showPlannerModal()"><i class="fa-solid fa-wand-magic-sparkles"></i> Start Free Plan</button>
-            <div class="menu-btn" onclick="toggleMobileMenu()">
-                <i id="menu-icon" class="fa-solid fa-bars"></i>
-            </div>
-        </div>
-    </div>
-    <div id="mobileMenu" class="mobile-menu">
-        <a href="{% url 'howitswork' %}">">How it Works</a>
-        <a href="{% url 'recipes' %}">">Recipes</a>
-        <a href="#">Plans</a>
-        <a href="#">Community</a>
-        <a href="{% url 'blog' %}">">Blog</a>
-        <button class="cta-btn" style="width:100%; justify-content:center; margin-top:10px;" onclick="showPlannerModal()">Start Free Plan</button>
-    </div>
-</header>
-
+{% block content %}
 <!-- ========== BLOG PAGE MAIN CONTENT (hero, categories, grid, etc.) ========== -->
+ <main>
 <section class="blog-hero">
     <div class="container" style="width:100%">
         <div class="hero-grid">
@@ -363,59 +326,8 @@
 </div>
 </div>
 </section>
-
-
-
-<!-- ========== FOOTER (exactly from second snippet) ========== -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-brand">
-            <div class="brand-logo">🍽️</div>
-            <h2>PlatePal</h2>
-            <p>Making every meal meaningful with AI that actually gets your tastebuds.</p>
-            <div class="socials">
-                <i class="fa-brands fa-instagram" onclick="alert('Instagram')"></i>
-                <i class="fa-brands fa-x-twitter" onclick="alert('X')"></i>
-                <i class="fa-brands fa-youtube" onclick="alert('YouTube')"></i>
-            </div>
-        </div>
-        <div class="footer-links">
-            <h4>Product</h4>
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">Mobile App</a>
-            <a href="{% url 'blog' %}">">Blog</a>
-        </div>
-        <div class="footer-links">
-            <h4>Company</h4>
-            <a href="#">About</a>
-            <a href="#">Stories</a>
-            <a href="#">Careers</a>
-            <a href="{% url 'contact' %}">">Contact</a>
-        </div>
-        <div class="footer-newsletter">
-            <h4>Get weekly deliciousness</h4>
-            <div class="newsletter-box">
-                <input type="email" id="footerNewsEmail" placeholder="your@email.com">
-                <button onclick="subscribeNewsletter()">Subscribe</button>
-            </div>
-            <p class="note">Zero spam. Only tasty recipes ✨</p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© 2026 PlatePal • Made with ❤️</p>
-        <div class="footer-bottom-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Accessibility</a>
-        </div>
-        <p>India 🌍</p>
-    </div>
-</footer>
-
-<!-- PLANNER MODAL -->
-<div id="plannerModal" class="modal"><div class="modal-card"><div style="padding:2rem;"><h3 style="font-size:2rem; text-align:center;">Let’s build your perfect week</h3><div><label>How many people?</label><div style="display:flex; gap:0.5rem; margin:0.5rem 0;"><button class="plan-opt" data-val="1">Just me</button><button class="plan-opt active-plan">2 people</button><button class="plan-opt">Family of 4</button></div></div><div><label>Diet preference</label><select id="dietSelect" style="width:100%; padding:1rem; border-radius:2rem; margin:0.5rem 0;"><option>Balanced & healthy</option><option>High-protein</option><option>Vegan</option><option>Indian vegetarian</option></select></div><div><label>Days (3-7)</label><input type="range" min="3" max="7" value="5" id="daysSlider" style="width:100%;"><span id="daysVal">5</span></div></div><div style="background:#011627; display:flex; justify-content:space-between; padding:1.5rem;"><button onclick="closePlannerModal()" style="color:white;">Cancel</button><button onclick="genPlan()" style="color:white; font-weight:bold;">GENERATE MY PLAN ✨</button></div></div></div>
-
+</main>
+{% endblock %}
+{% block extra_js %}
 <script src="{% static 'js/blog.js' %}"></script>
-</body>
-</html>
+{% endblock %}

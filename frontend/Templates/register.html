@@ -1,15 +1,10 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<link rel="stylesheet" href="{% static 'css/register.css' %}">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<body>
- 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/register.css'%}">
+{% endblock %}
+
+{% block content %}
+ <main>
   <div class="bigb">
      <a href="{% url 'home' %}" class="close-btn">
         &times;
@@ -45,5 +40,8 @@
 
     </form>
   </div>
-</body>
-</html>
+  </main>
+{% endblock %}
+{% block extra_js %}
+<script></script>
+{% endblock %}

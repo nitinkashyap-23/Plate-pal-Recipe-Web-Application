@@ -1,56 +1,11 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PlatePal Header</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/howitswork.css'%}">
-</head>
+{% endblock %}
 
-<body>
-<header id="header">
-<div class="container">
-        <!-- Logo -->
-         <div class="logo">
-            <div class="logo-box">🍽️</div>
-            <a href="{% url 'home' %}">PlatePal</a>
-        </div>
-<!-- Desktop Navigation -->
-    <nav>
-        <a href="{% url 'howitswork' %}"><i class="fa-solid fa-circle-info"></i> How it Works</a>
-        <a href="{% url 'recipes' %}"><i class="fa-solid fa-utensils"></i> Recipes</a>
-        <a href="#">Plans</a>
-        <a href="#">Community</a>
-        <a href="{% url 'blog' %}">Blog</a>
-    </nav>
-<!-- Buttons -->
-<div class="header-buttons">
-    <a href="{% url 'login' %}" class="login-btn">
-        <i class="fa-solid fa-user"></i>
-        Log in
-    </a>
-    <button class="cta-btn">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        Start Free Plan
-    </button>
-    <div class="menu-btn" onclick="toggleMenu()">
-        <i id="menu-icon" class="fa-solid fa-bars"></i>
-    </div>
-</div>
-</div>
-<!-- Mobile Menu -->
-<div id="mobileMenu" class="mobile-menu">
-    <a href="{% url 'howitswork' %}">How it Works</a>
-    <a href="{% url 'recipes' %}">Recipes</a>
-    <a href="#">Plans</a>
-    <a href="#">Community</a>
-    <a href="{% url 'blog' %}">Blog</a>
-</div>
-</header>
+{% block content %}
 
 <section class="how-hero-bg hero-section">
     <div class="hero-container">
@@ -213,62 +168,7 @@ Preparing food
 
 </section>
 
-<footer class="footer">
-    <div class="footer-container">
-        <!-- LEFT (Brand) -->
-        <div class="footer-brand">
-            <div class="brand-logo">
-                🍽️
-            </div>
-            <h2>PlatePal</h2>
-            <p>Making every meal meaningful with AI that actually gets your tastebuds.</p>
-
-            <div class="socials">
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-youtube"></i>
-            </div>
-        </div>
-        <!-- LINKS -->
-        <div class="footer-links">
-            <h4>Product</h4>
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">Mobile App</a>
-            <a href="#">Blog</a>
-        </div>
-        <div class="footer-links">
-            <h4>Company</h4>
-            <a href="#">About</a>
-            <a href="#">Stories</a>
-            <a href="#">Careers</a>
-            <a href="{% url 'contact' %}">Contact</a>
-        </div>
-        <!-- NEWSLETTER -->
-        <div class="footer-newsletter">
-            <h4>Get weekly deliciousness</h4>
-            <div class="newsletter-box">
-                <input type="email" placeholder="your@email.com">
-                <button>Subscribe</button>
-            </div>
-            <p class="note">Zero spam. Only tasty recipes ✨</p>
-        </div>
-    </div>
-    <!-- BOTTOM BAR -->
-    <div class="footer-bottom">
-        <p>© 2026 PlatePal • Made with ❤️</p>
-
-        <div class="footer-bottom-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Accessibility</a>
-        </div>
-
-        <p>India 🌍</p>
-    </div>
-</footer>
-
-<script src="{% static 'js/howitswork.js'%}"></script>
-
-</body>
-</html>
+{% endblock %}
+{% block extra_js %}
+<script></script>
+{% endblock %}
